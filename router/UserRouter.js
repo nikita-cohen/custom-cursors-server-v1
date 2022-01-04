@@ -25,4 +25,27 @@ router.route('/:id')
         }
     })
 
+
+router.route('/last-used/:id')
+    .get(async  (req, res) => {
+        const userId = req.params.id;
+        try {
+            const data = await userService.getUserLastUsedCollection(userId);
+            res.send(data).status(200);
+        } catch (e) {
+            console.log(e)
+        }
+    })
+
+router.route('/collection/:id')
+    .get(async  (req, res) => {
+        const userId = req.params.id;
+        try {
+            const data = await userService.getUserCollection(userId)
+            res.send(data).status(200);
+        } catch (e) {
+            console.log(e)
+        }
+    })
+
 module.exports = router;

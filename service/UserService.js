@@ -57,7 +57,7 @@ const findCursorInCollection = (collectionId, cursorId) => {
                 }
             })
         } catch (e) {
-            reject(e);
+            reject(e)
         }
     })
 }
@@ -89,7 +89,7 @@ const updateUser = (userId, user) => {
             if (err) {
                 reject(err)
             } else {
-                resolve("updated");
+                resolve("updated")
             }
         })
     })
@@ -102,7 +102,7 @@ const isCursorExistInUserCollection = (userCollection, cursorId) => {
             isExist = true;
         }
     })
-    return isExist;
+    return isExist
 }
 
 const addCollectionToUserLastUsedCollection = (user, collectionId) => {
@@ -118,7 +118,7 @@ const isCollectionExistInUserLastUsedCollection = (userLastUsed, collectionID) =
             isExist = true;
         }
     })
-    return isExist;
+    return isExist
 }
 
 const addCursor = (dataObject) => {
@@ -132,11 +132,11 @@ const addCursor = (dataObject) => {
                 user.lastUsedCollection = addCollectionToUserLastUsedCollection(user, cursor.collectionId);
                 user.cursorsCollection = addCursorToUserCollection(user, cursor);
                 const status = await updateUser(user.id, user);
-                resolve(status);
+                resolve(status)
            } else if (!isExistCollection) {
                user.cursorsCollection = addCursorToUserCollection(user, cursor);
                const status = await updateUser(user.id, user);
-               resolve(status);
+               resolve(status)
            } else {
                resolve("you already got this cursor")
            }
@@ -157,9 +157,31 @@ const deleteCursor = (dataObject) => {
             const status = await updateUser(user._id, user)
             resolve(status)
         } catch (e) {
-            reject(e);
+            reject(e)
         }
     })
 }
 
-module.exports = {addUser, deleteUser, addCursor, deleteCursor};
+const getUserLastUsedCollection = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await getOneUser(userId);
+            resolve(user.lastUsedCollection)
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+const getUserCollection = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await getOneUser(userId);
+            resolve(user.cursorsCollection);
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+module.exports = {addUser, deleteUser, addCursor, deleteCursor, getUserLastUsedCollection, getUserCollection};
