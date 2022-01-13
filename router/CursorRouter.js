@@ -1,27 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const userService = require("../service/UserService");
+const cursorController = require("../controller/cursor-controller/CursorController")
 
-router.route('/')
-    .post(async (req, res) => {
-        const data = req.body;
-        try {
-            const status = await userService.addCursor(data);
-            res.send(status).status(200);
-        } catch (e) {
-            res.json(e);
-        }
-    })
+router.post('/', cursorController.addCursorController)
 
-router.route('/')
-    .delete(async (req, res) => {
-        const data = req.body;
-        try {
-            const status = await userService.deleteCursor(data)
-            res.send(status).status(200);
-        } catch (e) {
-            res.json(e);
-        }
-    })
+router.delete('/', cursorController.deleteCursorController)
 
 module.exports = router;
