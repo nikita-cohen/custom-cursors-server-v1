@@ -1,4 +1,4 @@
-const collectionService = require('../../service/CollectionService');
+const collectionService = require('../service/CollectionService');
 
  const getAllCollectionsController = async (req, res) => {
     const numberOfCollections = parseInt(req.query.numberOfCollection);

@@ -1,4 +1,4 @@
-const userService = require("../../service/UserService");
+const userService = require("../service/UserService");
 
 const addCursorController = async (req, res) => {
     const data = req.body;

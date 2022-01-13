@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const cursorController = require("../controller/cursor-controller/CursorController")
+const cursorController = require("../controller/CursorController")
 
 router.post('/', cursorController.addCursorController)
 

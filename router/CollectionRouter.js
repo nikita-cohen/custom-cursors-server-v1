@@ -1,5 +1,5 @@
 const express = require('express');
-const collectionController = require("../controller/collection-controller/CollectionController")
+const collectionController = require("../controller/CollectionController")
 const router = express.Router();
 
 router.get('/', collectionController.getAllCollectionsController)
