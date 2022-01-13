@@ -17,7 +17,7 @@ const getAllCollection = (numberOfCollections) => {
 
 const getOneCollection = (collectionId) => {
     return new Promise((resolve, reject) => {
-        CollectionSchema.find({_id : collectionId},
+        CollectionSchema.findOne({_id : collectionId},
             ((err, data) => {
             if (err) {
                 reject(err)

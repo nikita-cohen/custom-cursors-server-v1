@@ -1,52 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const userService = require("../service/UserService");
+const userController = require('../controller/user-controller/UserController')
 
+router.post('/', userController.addUserController)
 
-router.route('/')
-    .post(async (req, res) => {
-        const newUser = req.body;
-        try {
-            let data = await userService.addUser(newUser);
-            res.send(data).status(200);
-        } catch (e) {
-            res.json(e);
-        }
-    })
+router.delete('/:id', userController.deleteUserController)
 
-router.route('/:id')
-    .delete(async  (req, res) => {
-        const userId = req.params.id;
-        try {
-            const data = await userService.deleteUser(userId)
-            res.send(data).status(200);
-        } catch (e) {
-            res.json(e);
-        }
-    })
+router.get('/last-used/:id', userController.getUserLastUsedCollectionController)
 
-
-router.route('/last-used/:id')
-    .get(async  (req, res) => {
-        const userId = req.params.id;
-        try {
-            const data = await userService.getUserLastUsedCollection(userId);
-            res.send(data).status(200);
-        } catch (e) {
-            res.json(e);
-        }
-    })
-
-router.route('/collection/:id')
-    .get(async  (req, res) => {
-        const userId = req.params.id;
-        try {
-            const data = await userService.getUserCollection(userId)
-            res.send(data).status(200);
-        } catch (e) {
-            res.json(e);
-        }
-    })
+router.get('/collection/:id', userController.getUserCollectionController)
 
 module.exports = router;
 

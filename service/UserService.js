@@ -48,9 +48,9 @@ const findCursorInCollection = (collectionId, cursorId) => {
             const data = await collectionService.getOneCollection(collectionId);
             const cursorObj = {
                 collectionId ,
-                collectionName : data[0].name
+                collectionName : data.name
             }
-            data[0].items.forEach(cursor => {
+            data.items.forEach(cursor => {
                 if (cursor.id === cursorId) {
                     cursorObj.cursorObj = cursor;
                     resolve(cursorObj)
@@ -67,9 +67,9 @@ const addCursorToUserCollection = (user, cursor) => {
     const cursorObject = {
             id : cursor.cursorObj.id,
             name : cursor.cursorObj.name,
-            image : cursor.cursorObj.image,
-            cursor_path : cursor.cursorObj.cursor.path,
-            pointer_path : cursor.cursorObj.pointer.path,
+            image : cursor.cursorObj.newCursorImagePath,
+            cursor_path : cursor.cursorObj.cursor.newPath,
+            pointer_path : cursor.cursorObj.pointer.newPath,
             collectionName : cursor.collectionName,
             collectionId : cursor.collectionId,
             width : 128,
@@ -111,7 +111,7 @@ const addCollectionToUserLastUsedCollection = (user, collectionId) => {
     return lastUsed;
 }
 
-const isCollectionExistInUserLastUsedCollection = (userLastUsed, collectionID) => {
+const isLastUsedCollection = (userLastUsed, collectionID) => {
     let isExist = false;
     userLastUsed.forEach(collection => {
         if (collection === collectionID) {
@@ -126,16 +126,22 @@ const addCursor = (dataObject) => {
         try {
            const user = await getOneUser(dataObject.userId);
            const cursor = await findCursorInCollection(dataObject.collectionId, dataObject.cursorId);
+
            const isExistCollection = isCursorExistInUserCollection(user.cursorsCollection, cursor.cursorObj.id);
-           const isExistLastUsed = isCollectionExistInUserLastUsedCollection(user.lastUsedCollection, cursor.collectionId);
+           const isExistLastUsed = isLastUsedCollection(user.lastUsedCollection, cursor.collectionId);
+
            if (!isExistCollection && !isExistLastUsed) {
                 user.lastUsedCollection = addCollectionToUserLastUsedCollection(user, cursor.collectionId);
                 user.cursorsCollection = addCursorToUserCollection(user, cursor);
+
                 const status = await updateUser(user.id, user);
+
                 resolve(status)
            } else if (!isExistCollection) {
                user.cursorsCollection = addCursorToUserCollection(user, cursor);
+
                const status = await updateUser(user.id, user);
+
                resolve(status)
            } else {
                resolve("you already got this cursor")
