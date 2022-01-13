@@ -6,7 +6,8 @@ const collectionSchema = new mongoose.Schema({
     "image" : {"type": "String"},
     "slug" : {"type": "String"},
     "count_download": {"type": "Number"},
-    "items" : {"type": ["Mixed"]}
+    "items" : {"type": ["Mixed"]},
+    "newImage": {"type": "String"}
 });
 
 module.exports = mongoose.model("cursorCollection", collectionSchema, "cursorCollection");

@@ -10,7 +10,7 @@ router.route('/')
             let data = await userService.addUser(newUser);
             res.send(data).status(200);
         } catch (e) {
-            console.log(e);
+            res.json(e);
         }
     })
 
@@ -21,7 +21,7 @@ router.route('/:id')
             const data = await userService.deleteUser(userId)
             res.send(data).status(200);
         } catch (e) {
-            console.log(e)
+            res.json(e);
         }
     })
 
@@ -33,7 +33,7 @@ router.route('/last-used/:id')
             const data = await userService.getUserLastUsedCollection(userId);
             res.send(data).status(200);
         } catch (e) {
-            console.log(e)
+            res.json(e);
         }
     })
 
@@ -44,8 +44,10 @@ router.route('/collection/:id')
             const data = await userService.getUserCollection(userId)
             res.send(data).status(200);
         } catch (e) {
-            console.log(e)
+            res.json(e);
         }
     })
 
 module.exports = router;
+
+

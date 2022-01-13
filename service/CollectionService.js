@@ -28,4 +28,26 @@ const getOneCollection = (collectionId) => {
     })
 }
 
-module.exports = {getAllCollection, getOneCollection};
+const addCollection = (collection) => {
+    return new Promise((resolve, reject) => {
+        const newCollection = new CollectionSchema({
+            "id" : collection.id,
+            "name" : collection.name,
+            "image" : collection.image,
+            "slug" : collection.slug,
+            "count_download": collection.count_download,
+            "items" : collection.items,
+            "newImage": collection.newImage
+            })
+
+        newCollection.save((err) => {
+            if (err) {
+                reject(err)
+            } else {
+              resolve(newCollection)
+            }
+        })
+    })
+}
+
+module.exports = {getAllCollection, getOneCollection, addCollection};

@@ -9,7 +9,7 @@ router.route('/')
             const status = await userService.addCursor(data);
             res.send(status).status(200);
         } catch (e) {
-            console.log(e)
+            res.json(e);
         }
     })
 
@@ -20,7 +20,7 @@ router.route('/')
             const status = await userService.deleteCursor(data)
             res.send(status).status(200);
         } catch (e) {
-            console.log(e)
+            res.json(e);
         }
     })
 

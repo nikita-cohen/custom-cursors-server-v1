@@ -9,7 +9,7 @@ router.route('/')
             const collections = await collectionService.getAllCollection(numberOfCollections);
             res.json(collections);
         } catch (e) {
-            console.log(e);
+            res.json(e);
         }
     });
 
@@ -20,9 +20,19 @@ router.route('/:id')
             const data = await collectionService.getOneCollection(collectionId)
             res.json(data)
         } catch (e) {
-            console.log(e)
+            res.json(e);
         }
     });
 
+router.route('/add')
+    .post(async  (req, res) => {
+        const collection = req.body;
+        try {
+            const data = await collectionService.addCollection(collection)
+            res.json(data)
+        } catch (e) {
+            res.json(e);
+        }
+    })
 
 module.exports = router;
