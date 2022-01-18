@@ -18,7 +18,6 @@ app.use('/node/collection', collectionRouter);
 app.use('/node/user', userRouter);
 app.use('/node/cursor', cursorRouter);
 
-
-app.listen(8089, "mycustomcursors.online")
+app.listen(8089)
 
 
