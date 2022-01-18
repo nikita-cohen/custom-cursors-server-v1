@@ -14,9 +14,9 @@ require("./config/ConfigDB");
 
 app.use(express.json());
 app.use(cors());
-app.use('/collection', collectionRouter);
-app.use('/user', userRouter);
-app.use('/cursor', cursorRouter);
+app.use('/node/collection', collectionRouter);
+app.use('/node/user', userRouter);
+app.use('/node/cursor', cursorRouter);
 
 
 app.listen(8089, "mycustomcursors.online")
