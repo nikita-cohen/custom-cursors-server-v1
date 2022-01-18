@@ -30,4 +30,14 @@ const addCollectionController = async (req, res) => {
     }
 }
 
-module.exports = {getAllCollectionsController, getOneCollectionController, addCollectionController};
+const searchCollectionController = async (req, res) => {
+     const collectionName = req.params.name;
+     try {
+         const data = await collectionService.searchCollection(collectionName)
+         res.json(data)
+     } catch (e) {
+         res.json(e)
+     }
+}
+
+module.exports = {getAllCollectionsController, getOneCollectionController, addCollectionController, searchCollectionController};

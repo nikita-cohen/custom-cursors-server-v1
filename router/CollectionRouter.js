@@ -6,6 +6,8 @@ router.get('/', collectionController.getAllCollectionsController)
 
 router.get('/:id', collectionController.getOneCollectionController)
 
+router.get('/search/:name', collectionController.searchCollectionController)
+
 router.post('/add', collectionController.addCollectionController)
 
 module.exports = router;

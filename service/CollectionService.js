@@ -50,4 +50,18 @@ const addCollection = (collection) => {
     })
 }
 
-module.exports = {getAllCollection, getOneCollection, addCollection};
+const searchCollection = (word) => {
+    return new Promise((resolve, reject) => {
+        CollectionSchema.find({name : {$regex : new RegExp("^" + word.toLowerCase(), "i")}},
+            (err, data) => {
+            if (err){
+                reject(err)
+            } else {
+                resolve(data)
+            }
+        })
+    })
+}
+
+
+module.exports = {getAllCollection, getOneCollection, addCollection, searchCollection};
