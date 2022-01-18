@@ -6,12 +6,6 @@ const collectionRouter = require('./router/CollectionRouter');
 const userRouter = require("./router/UserRouter");
 const cursorRouter = require("./router/CursorRouter");
 const bodyParser = require('body-parser');
-const http = require('http');
-
-
-const hostname = '178.62.228.13';
-const port = 8089;
-
 
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
@@ -24,8 +18,6 @@ app.use('/collection', collectionRouter);
 app.use('/user', userRouter);
 app.use('/cursor', cursorRouter);
 
-const server = http.createServer(app);
+app.listen("178.62.228.13:8089")
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
+
