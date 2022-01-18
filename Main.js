@@ -18,13 +18,7 @@ app.use('/collection', collectionRouter);
 app.use('/user', userRouter);
 app.use('/cursor', cursorRouter);
 
-app.get('/', function(req, res) {
-    res.render('default.htm');
-});
 
-const port = 8089;
-const host = "178.62.228.13";
-
-app.listen(port)
+app.listen(8089, "https://mycustomcursors.online/node")
 
 
