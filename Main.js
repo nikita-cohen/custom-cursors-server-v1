@@ -8,6 +8,7 @@ const cursorRouter = require("./router/CursorRouter");
 const bodyParser = require('body-parser');
 const http = require('http');
 
+
 const hostname = '178.62.228.13';
 const port = 8089;
 
@@ -23,6 +24,8 @@ app.use('/collection', collectionRouter);
 app.use('/user', userRouter);
 app.use('/cursor', cursorRouter);
 
-app.listen(port, hostname, () => {
+const server = http.createServer(app);
+
+server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
