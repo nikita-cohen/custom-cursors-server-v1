@@ -21,8 +21,6 @@ app.use('/cursor', cursorRouter);
 const port = 8089;
 const host = "178.62.228.13";
 
-app.listen(port, host, () => {
-    console.log("ok")
-})
+app.listen(port)
 
 
