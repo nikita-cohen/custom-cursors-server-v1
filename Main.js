@@ -18,6 +18,11 @@ app.use('/collection', collectionRouter);
 app.use('/user', userRouter);
 app.use('/cursor', cursorRouter);
 
-app.listen("178.62.228.13:8089")
+const port = 8089;
+const host = "178.62.228.13";
+
+app.listen(port, host, () => {
+    console.log("ok")
+})
 
 
