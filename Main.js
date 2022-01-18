@@ -19,6 +19,6 @@ app.use('/user', userRouter);
 app.use('/cursor', cursorRouter);
 
 
-app.listen(8089, "https://mycustomcursors.online/node")
+app.listen(8089, "mycustomcursors.online")
 
 
