@@ -3,7 +3,6 @@ const userService = require("../service/UserService");
 const addCursorController = async (req, res) => {
     const data = req.body;
     try {
-        console.log(data)
         const status = await userService.addCursor(data);
         res.send(status).status(200);
     } catch (e) {

@@ -46,10 +46,12 @@ const findCursorInCollection = (collectionId, cursorId) => {
     return new Promise(async (resolve, reject) => {
         try {
             const data = await collectionService.getOneCollection(collectionId);
+
             const cursorObj = {
                 collectionId ,
                 collectionName : data.name
             }
+
             data.items.forEach(cursor => {
                 if (cursor.id === cursorId) {
                     cursorObj.cursorObj = cursor;
