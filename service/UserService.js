@@ -123,6 +123,14 @@ const isLastUsedCollection = (userLastUsed, collectionID) => {
     return isExist
 }
 
+const replaceLastUsedCursor = (user, collectionId) => {
+    const newArray = user.lastUsedCollection;
+    const index  = newArray.findIndex(x => x = collectionId)
+    newArray.splice(index, 1);
+    user.lastUsedCollection = newArray;
+    return addCollectionToUserLastUsedCollection(user, collectionId);
+}
+
 const addCursor = (dataObject) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -141,6 +149,7 @@ const addCursor = (dataObject) => {
                 resolve(status)
            } else if (!isExistCollection) {
                user.cursorsCollection = addCursorToUserCollection(user, cursor);
+               user.lastUsedCollection = replaceLastUsedCursor(user, cursor.collectionId);
 
                const status = await updateUser(user.id, user);
 
